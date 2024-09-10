@@ -7,7 +7,6 @@ const AuthRouter = require('./router/AuthRouter')
 
 const app = express()
 
-const HOSTNAME = process.env.HOSTNAME || 'localhost'
 const PORT = process.env.PORT || 3000
 const UI = process.env.UI
 
@@ -25,7 +24,7 @@ app.use('/auth', AuthRouter)
 const run = async () => {
     try {
         await mongoose.connect(UI)
-        app.listen(PORT, () => console.log(`Server was launched - http://${HOSTNAME}:${PORT}`))
+        app.listen(PORT, () => console.log(`Server was launched - mstudyaivercel-production.up.railway.app`))
     } catch (error) {
         console.log(error)
         throw error
