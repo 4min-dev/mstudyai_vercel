@@ -5,7 +5,7 @@ const AuthMiddleware = require("../middleware/AuthMiddleware");
 const AuthRouter = new Router()
 
 AuthRouter.post('/login', AuthMiddleware.loginMiddleware(), AuthController.login)
-AuthRouter.post('/refreshToken', AuthController.refreshToken)
+AuthRouter.get('/refreshToken', AuthController.refreshToken)
 AuthRouter.get('/verifyUser', AuthController.verifyUser)
 
 module.exports = AuthRouter
