@@ -30,19 +30,20 @@ class AuthController {
             const refreshToken = jwt.sign({ userId: user._id }, REFRESH_SECRET_KEY, { expiresIn: '7d' });
 
 
-            res.cookie('accessToken', accessToken, {
-                
-                maxAge: 15 * 60 * 1000, // 15 минут
-                secure: false, // Установите false для HTTP
-                sameSite: 'None'
-            });
             
-            res.cookie('refreshToken', refreshToken, { 
-                 
-                maxAge: 7 * 24 * 60 * 60 * 1000, // 7 дней
-                secure: false, // Установите false для HTTP
-                sameSite: 'None'
-            });
+        console.log('Setting cookies:', accessToken, refreshToken);
+        res.cookie('accessToken', accessToken, {
+            httpOnly: true,
+            maxAge: 15 * 60 * 1000,
+            secure: false,
+            sameSite: 'Lax'
+        });
+        res.cookie('refreshToken', refreshToken, {
+            httpOnly: true,
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+            secure: false,
+            sameSite: 'Lax'
+        });
 
             return res
                 .status(200)
