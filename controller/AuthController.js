@@ -32,16 +32,17 @@ class AuthController {
 
             res.cookie('accessToken', accessToken, {
                 httpOnly: true,
-                maxAge: 15 * 60 * 1000,
-                secure:true,
+                maxAge: 15 * 60 * 1000, // 15 минут
+                secure: false, // Установите false для HTTP
                 sameSite: 'None'
-            });; // 15 минут
+            });
+            
             res.cookie('refreshToken', refreshToken, { 
                 httpOnly: true, 
-                maxAge: 7 * 24 * 60 * 60 * 1000,
-                secure:true,
+                maxAge: 7 * 24 * 60 * 60 * 1000, // 7 дней
+                secure: false, // Установите false для HTTP
                 sameSite: 'None'
-            }); // 7 дней
+            });
 
             return res
                 .status(200)
