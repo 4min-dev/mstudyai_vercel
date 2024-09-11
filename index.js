@@ -12,6 +12,7 @@ const PORT = process.env.PORT || 3000
 const UI = process.env.UI
 
 app.use(cors({
+    origin: 'https://mstudyai.com',
     credentials: true
 }));
 app.use(cookieParser(process.env.SECRET_COOKIE))
