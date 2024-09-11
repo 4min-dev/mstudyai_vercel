@@ -51,7 +51,7 @@ class AuthController {
 
         } catch (error) {
             console.log(error);
-            throw new error(error)
+            return res.status(500).json({message:error})
         }
     }
 
@@ -76,7 +76,7 @@ class AuthController {
 
         } catch (error) {
             console.log(error);
-            throw new error(error)
+            return res.status(500).json({message:error})
         }
     }
 
