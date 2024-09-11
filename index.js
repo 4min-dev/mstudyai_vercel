@@ -11,12 +11,10 @@ const HOSTNAME = process.env.HOSTNAME || 'localhost'
 const PORT = process.env.PORT || 3000
 const UI = process.env.UI
 
-const corsOptions = {
-    origin: 'https://mstudyai.com', // Замените на ваш реальный URL фронтенда
-    credentials: true // Это позволяет передавать и получать куки
-};
-
-app.use(cors(corsOptions));
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+}));
 app.use(cookieParser(process.env.SECRET_COOKIE))
 app.use(express.json())
 

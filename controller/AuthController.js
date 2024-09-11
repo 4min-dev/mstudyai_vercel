@@ -61,7 +61,13 @@ class AuthController {
                 return res.status(401).json({ message: 'Unauthorized' });
             }
 
-            return res.status(200).json({ authorizated:true });
+            jwt.verify(accessToken, process.env.JWT_ACCESS, (err,decoded) => {
+                if(err) {
+                    return res.status(403).json({message:err})
+                }
+
+                return res.status(200).json({ authorizated:true, data:decoded });
+            })
         } catch (error) {
             return res.status(500).json({ message: error.message });
         }
@@ -77,7 +83,7 @@ class AuthController {
 
             jwt.verify(refreshToken, REFRESH_SECRET_KEY, (err, decoded) => {
                 if (err) {
-                    return res.status(403).json({ message: "Invalid refresh token" });
+                    return res.status(403).json({ message: err });
                 }
 
                 const accessToken = jwt.sign({ userId: decoded.userId }, SECRET_KEY, { expiresIn: '15m' });
