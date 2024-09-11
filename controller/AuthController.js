@@ -26,24 +26,14 @@ class AuthController {
                 return res.status(400).json({ message: "Неверный пароль" });
             }
 
-            const accessToken = jwt.sign({ userId: user._id }, SECRET_KEY, { expiresIn: '15m' });
             const refreshToken = jwt.sign({ userId: user._id }, REFRESH_SECRET_KEY, { expiresIn: '7d' });
 
-
-            
-        console.log('Setting cookies:', accessToken, refreshToken);
-        res.cookie('accessToken', accessToken, {
-            httpOnly: true,
-            maxAge: 15 * 60 * 1000,
-            secure: true,
-            sameSite: 'None'
-        });
-        res.cookie('refreshToken', refreshToken, {
-            httpOnly: true,
-            maxAge: 7 * 24 * 60 * 60 * 1000,
-            secure: true,
-            sameSite: 'None'
-        });
+            res.cookie('refreshToken', refreshToken, {
+                httpOnly: true,
+                maxAge: 7 * 24 * 60 * 60 * 1000,
+                secure: true,
+                sameSite: 'None'
+            });
 
             return res
                 .status(200)
@@ -51,7 +41,7 @@ class AuthController {
 
         } catch (error) {
             console.log(error);
-            return res.status(500).json({message:error})
+            return res.status(500).json({ message: error })
         }
     }
 
@@ -76,7 +66,7 @@ class AuthController {
 
         } catch (error) {
             console.log(error);
-            return res.status(500).json({message:error})
+            return res.status(500).json({ message: error })
         }
     }
 
