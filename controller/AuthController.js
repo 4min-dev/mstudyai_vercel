@@ -56,6 +56,7 @@ class AuthController {
 
     async verifyUser(req, res) {
         try {
+            console.log('Cookies:', req.cookies)
             const { accessToken } = req.cookies;
 
             if (!accessToken) {
