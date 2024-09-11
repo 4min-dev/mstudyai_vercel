@@ -33,10 +33,14 @@ class AuthController {
             res.cookie('accessToken', accessToken, {
                 httpOnly: true,
                 maxAge: 15 * 60 * 1000,
+                secure:false,
+                sameSite: 'None'
             });; // 15 минут
             res.cookie('refreshToken', refreshToken, { 
                 httpOnly: true, 
                 maxAge: 7 * 24 * 60 * 60 * 1000,
+                secure:false,
+                sameSite: 'None'
             }); // 7 дней
 
             return res
