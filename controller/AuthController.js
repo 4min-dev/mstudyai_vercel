@@ -55,33 +55,12 @@ class AuthController {
         }
     }
 
-    async verifyUser(req, res) {
-        try {
-            console.log('Cookies:', req.cookies)
-            const { accessToken } = req.cookies;
-
-            if (!accessToken) {
-                return res.status(401).json({ message: 'Unauthorized' });
-            }
-
-            jwt.verify(accessToken, process.env.JWT_ACCESS, (err,decoded) => {
-                if(err) {
-                    return res.status(403).json({message:err})
-                }
-
-                return res.status(200).json({ authorizated:true, data:decoded });
-            })
-        } catch (error) {
-            return res.status(500).json({ message: error.message });
-        }
-    }
-
     async refreshToken(req, res) {
         try {
             const { refreshToken } = req.cookies;
 
             if (!refreshToken) {
-                return res.status(401).json({ message: "No refresh token found" });
+                return res.status(401).json({ message: "Not authorizated" });
             }
 
             jwt.verify(refreshToken, REFRESH_SECRET_KEY, (err, decoded) => {
